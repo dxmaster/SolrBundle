@@ -40,6 +40,11 @@ class Field extends Annotation
     /**
      * @var string
      */
+    public $trackedFields;
+
+    /**
+     * @var string
+     */
     public $nestedClass;
 
     /**
@@ -127,6 +132,16 @@ class Field extends Annotation
     public function getFieldModifier()
     {
         return $this->fieldModifier;
+    }
+
+    /**
+     * Field list for track
+     *
+     * @return string
+     */
+    public function getTrackedFields()
+    {
+        return $this->trackedFields;
     }
 
     /**

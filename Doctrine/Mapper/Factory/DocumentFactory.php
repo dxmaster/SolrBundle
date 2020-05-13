@@ -69,7 +69,12 @@ class DocumentFactory
                 $getterValue = $this->callGetterMethod($metaInformation->getEntity(), $field->getGetterName());
                 $document->addField($field->getNameWithAlias(), $getterValue, $field->getBoost());
             } else { // field contains simple data-type
-                $document->addField($field->getNameWithAlias(), $fieldValue, $field->getBoost());
+                //$document->addField($field->getNameWithAlias(), $fieldValue, $field->getBoost());
+                if ($getter = $field->getGetterName()) {
+                    $document->addField($field->getNameWithAlias(), $metaInformation->getEntity()->$getter(), $field->getBoost());
+                } else {
+                    $document->addField($field->getNameWithAlias(), $field->getValue(), $field->getBoost());
+                }
             }
 
             if ($field->getFieldModifier()) {
